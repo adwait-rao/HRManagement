@@ -9,7 +9,7 @@ public class Admin_Employee_login {
     {
         // ----------------JLable ---------------------------
         JLabel label = new JLabel("HR Management Software");
-        label.setBounds(200,0,400,150);
+        label.setBounds(120,0,400,150);
         label.setFont(new Font(null,Font.BOLD,30));
         label.setForeground(Color.BLACK);
         label.setIcon(image);
@@ -18,8 +18,8 @@ public class Admin_Employee_login {
         // ----------------Buttons ---------------------------
         JButton admin = new JButton("Admin Login");
         JButton Employee = new JButton("Employee Login");
-        admin.setBounds(300,250,200,50);
-        Employee.setBounds(300,400,200,50);
+        admin.setBounds(220,220,200,50);
+        Employee.setBounds(220,380,200,50);
         admin.setFocusable(false);
         Employee.setFocusable(false);
         admin.setFont(new Font("Comic Sans", Font.BOLD,18));
@@ -32,7 +32,7 @@ public class Admin_Employee_login {
 
         // ----------------Frames---------------------------
         JFrame frame = new JFrame("HR MANAGEMENT ");
-        frame.setSize(800,800);
+        frame.setSize(600,600);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setVisible(true);
