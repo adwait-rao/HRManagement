@@ -1,10 +1,19 @@
 package LoginPage;
 
+import com.managementhr.loginPrompt;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class Admin_Employee_login {
+public class Admin_Employee_login implements ActionListener {
     ImageIcon image = new ImageIcon("HLogo.png");
+
+    JButton admin = new JButton("Admin Login");
+    JButton Employee = new JButton("Employee Login");
+
+    JFrame frame = new JFrame("HR MANAGEMENT ");
     public Admin_Employee_login()
     {
         // ----------------JLable ---------------------------
@@ -16,8 +25,7 @@ public class Admin_Employee_login {
         // ----------------JLable ---------------------------
 
         // ----------------Buttons ---------------------------
-        JButton admin = new JButton("Admin Login");
-        JButton Employee = new JButton("Employee Login");
+        admin.addActionListener(this);
         admin.setBounds(220,220,200,50);
         Employee.setBounds(220,380,200,50);
         admin.setFocusable(false);
@@ -31,7 +39,7 @@ public class Admin_Employee_login {
         // ----------------Buttons ---------------------------
 
         // ----------------Frames---------------------------
-        JFrame frame = new JFrame("HR MANAGEMENT ");
+
         frame.setSize(600,600);
         frame.setResizable(false);
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -44,6 +52,14 @@ public class Admin_Employee_login {
 
         // ----------------Frames ---------------------------
     }
+
+    public void actionPerformed(ActionEvent e) {
+        if (e.getSource() == admin) {
+            new loginPrompt();
+            frame.dispose();
+        }
+    }
+
     public void paint(Graphics g)
     {
         g.drawLine(220,20,400,80);
