@@ -5,6 +5,10 @@ import java.awt.*;
 
 public class loginPrompt {
     JPasswordField passwd = new JPasswordField();
+
+    JButton loginButton = new JButton("Login");
+
+
     public loginPrompt() {
         JLabel label1 = new JLabel();
         JLabel label2 = new JLabel();
@@ -43,13 +47,20 @@ public class loginPrompt {
         //lframe.setLayout(null);
         JTextField text = new JTextField();
         text.setPreferredSize(new Dimension(200,30));
-        text.setBounds(280,200,180,40);
+        text.setBounds(280,210,180,25);
 
 
         //passwordfield
-        passwd.setBounds(280,280,180,40);
+        passwd.setBounds(280,290,180,25);
+
+        //login button
+        loginButton.setBounds(260, 380, 100, 40);
+        loginButton.setFocusable(false);
+        loginButton.setFont(new Font("Roboto", Font.BOLD, 18));
+        loginButton.setForeground(Color.BLACK);
 
         //add component
+        frame.add(loginButton);
         frame.add(labeltitle);
         frame.add(label1);
         frame.add(label2);
