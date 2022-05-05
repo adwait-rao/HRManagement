@@ -1,6 +1,7 @@
 package LoginPage;
 
 import com.managementhr.loginPrompt;
+import com.managementhr.loginPromptEmployee;
 
 import javax.swing.*;
 import java.awt.*;
@@ -22,7 +23,7 @@ public class Admin_Employee_login implements ActionListener {
         label.setFont(new Font(null,Font.BOLD,30));
         label.setForeground(Color.BLACK);
         label.setIcon(image);
-        // ----------------JLable ---------------------------
+        // ----------------JLabel ---------------------------
 
         // ----------------Buttons ---------------------------
         admin.addActionListener(this);
@@ -36,6 +37,7 @@ public class Admin_Employee_login implements ActionListener {
         Employee.setForeground(Color.BLACK);
         admin.setBackground(Color.LIGHT_GRAY);
         Employee.setBackground(Color.LIGHT_GRAY);
+        Employee.addActionListener(this);
         // ----------------Buttons ---------------------------
 
         // ----------------Frames---------------------------
@@ -56,6 +58,11 @@ public class Admin_Employee_login implements ActionListener {
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == admin) {
             new loginPrompt();
+            frame.dispose();
+        }
+
+        if (e.getSource() == Employee) {
+            new loginPromptEmployee();
             frame.dispose();
         }
     }
