@@ -1,14 +1,20 @@
 package com.managementhr;
 
+import LoginPage.AdminAndEmployeeIDPASS.AdminIDPass;
+import LoginPage.AdminLoggedInWindow;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.HashMap;
 
-public class loginPrompt {
+public class loginPrompt implements ActionListener {
     JPasswordField passwd = new JPasswordField();
-
+    JTextField text;
     JButton loginButton = new JButton("Login");
-
-
+    JFrame frame;
+    HashMap loginInfo = new HashMap<String,String>();
     public loginPrompt() {
         JLabel label1 = new JLabel();
         JLabel label2 = new JLabel();
@@ -32,7 +38,7 @@ public class loginPrompt {
         label2.setBounds(170, 260, 180, 80);
         label2.setFont(new Font("Roboto", Font.PLAIN, 20));
 
-        JFrame frame = new JFrame();
+        frame = new JFrame();
 
         frame.setVisible(true);
         //lframe.getContentPane();
@@ -41,11 +47,11 @@ public class loginPrompt {
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setTitle("HR Management Login");
         frame.setSize(600, 600);
-        frame.setResizable(true);
+        frame.setResizable(false);
         frame.setLayout(null);
 
         //lframe.setLayout(null);
-        JTextField text = new JTextField();
+        text= new JTextField();
         text.setPreferredSize(new Dimension(200,30));
         text.setBounds(280,210,180,25);
 
@@ -58,7 +64,7 @@ public class loginPrompt {
         loginButton.setFocusable(false);
         loginButton.setFont(new Font("Roboto", Font.BOLD, 18));
         loginButton.setForeground(Color.BLACK);
-
+        loginButton.addActionListener(this);
         //add component
         frame.add(loginButton);
         frame.add(labeltitle);
@@ -66,5 +72,32 @@ public class loginPrompt {
         frame.add(label2);
         frame.add(passwd);
         frame.add(text);
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == loginButton)
+        {
+            String userID = text.getText();
+           String password  = String.valueOf(passwd.getPassword());
+            AdminIDPass a1 = new  AdminIDPass();
+            loginInfo = a1.getlogininfo();
+          if(loginInfo.containsKey(userID))
+           {
+                if(loginInfo.get(userID).equals(password))
+               {
+                  new AdminLoggedInWindow();
+                   frame.dispose();
+               }
+               else
+              {
+                JOptionPane.showMessageDialog(null,"Wrong Password " ,"Enter Correct Password",JOptionPane.ERROR_MESSAGE);
+                }
+           }
+          else
+            {
+               JOptionPane.showMessageDialog(null,"Wrong ID " ,"Enter Correct ID",JOptionPane.ERROR_MESSAGE);
+           }
+        }
     }
 }

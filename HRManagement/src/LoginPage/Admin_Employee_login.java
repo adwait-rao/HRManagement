@@ -1,5 +1,6 @@
 package LoginPage;
 
+import LoginPage.AdminAndEmployeeIDPASS.AdminIDPass;
 import com.managementhr.loginPrompt;
 import com.managementhr.loginPromptEmployee;
 
@@ -7,6 +8,7 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.HashMap;
 
 public class Admin_Employee_login implements ActionListener {
     ImageIcon image = new ImageIcon("HLogo.png");
@@ -57,13 +59,21 @@ public class Admin_Employee_login implements ActionListener {
 
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == admin) {
-            new loginPrompt();
-            frame.dispose();
+        int a = JOptionPane.showConfirmDialog(null,"Are You Sure You Want To Enter Admin Login ?" ,"Admin Login",JOptionPane.YES_NO_OPTION);
+
+           if(a==0){
+               new loginPrompt();
+               frame.dispose();
+           }
         }
 
         if (e.getSource() == Employee) {
-            new loginPromptEmployee();
-            frame.dispose();
+            int a = JOptionPane.showConfirmDialog(null,"Are You Sure You Want To Enter Employee Login ?" ,"Admin Login",JOptionPane.YES_NO_OPTION);
+            if(a==0) {
+
+                new loginPromptEmployee();
+                frame.dispose();
+            }
         }
     }
 
