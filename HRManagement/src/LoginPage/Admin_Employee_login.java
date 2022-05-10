@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 public class Admin_Employee_login implements ActionListener {
-    ImageIcon image = new ImageIcon("HLogo.png");
+    ImageIcon image = new ImageIcon("C:\\Java Project HR Management\\HRManagement\\HRManagement\\src\\LoginPage\\hrmgr2.png");
 
     JButton admin = new JButton("Admin Login");
     JButton Employee = new JButton("Employee Login");
@@ -21,7 +21,7 @@ public class Admin_Employee_login implements ActionListener {
     {
         // ----------------JLable ---------------------------
         JLabel label = new JLabel("HR Management Software");
-        label.setBounds(120,0,400,150);
+        label.setBounds(20,0,600,150);
         label.setFont(new Font(null,Font.BOLD,30));
         label.setForeground(Color.BLACK);
         label.setIcon(image);

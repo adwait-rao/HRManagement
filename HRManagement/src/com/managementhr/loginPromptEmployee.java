@@ -50,7 +50,7 @@ public class loginPromptEmployee {
         JTextField text = new JTextField();
         text.setPreferredSize(new Dimension(200,30));
         text.setBounds(280,210,180,25);
-
+        text.setFont(new Font("Roboto", Font.BOLD, 18));
 
         //passwordfield
         passwd.setBounds(280,290,180,25);
