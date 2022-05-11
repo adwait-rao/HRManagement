@@ -1,7 +1,9 @@
 package com.managementhr;
 
+import LoginPage.ADMINEMPLOYEES.Adwait;
+import LoginPage.ADMINEMPLOYEES.Dnyaneshwari;
+import LoginPage.ADMINEMPLOYEES.Heramb;
 import LoginPage.AdminAndEmployeeIDPASS.AdminIDPass;
-import LoginPage.AdminLoggedInWindow;
 
 import javax.swing.*;
 import java.awt.*;
@@ -84,10 +86,23 @@ public class loginPrompt implements ActionListener {
             loginInfo = a1.getlogininfo();
           if(loginInfo.containsKey(userID))
            {
-                if(loginInfo.get(userID).equals(password))
+               if(loginInfo.get(userID).equals(password))
                {
-                  new AdminLoggedInWindow();
-                   frame.dispose();
+                   if(userID.equals("Heramb"))
+                   {
+                       new Heramb();
+                       frame.dispose();
+                   }
+                   else if(userID.equals("Adwait"))
+                   {
+                       new Adwait();
+                       frame.dispose();
+                   }
+                   else{
+                       new Dnyaneshwari();
+                       frame.dispose();
+                   }
+
                }
                else
               {
