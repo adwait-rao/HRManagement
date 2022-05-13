@@ -1,11 +1,15 @@
 package LoginPage.ADMINEMPLOYEES;
 
+import com.managementhr.loginPrompt;
+
+import LoginPage.Admin_Employee_login;
+
 import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.*;
 
-public class AdminPage implements ActionListener{
+public class AdminPage implements ActionListener {
 
     ImageIcon pfp = new ImageIcon("HRManagement/src/LoginPage/ADMINEMPLOYEES/images/blankpfp.png");
     JLabel name = new JLabel();
@@ -89,6 +93,7 @@ public class AdminPage implements ActionListener{
         logout.setForeground(Color.WHITE);
         logout.setBounds(1100, 35, 150, 30);
         logout.setIcon(new ImageIcon("HRManagement/src/LoginPage/ADMINEMPLOYEES/images/logoutico.png"));
+        logout.addActionListener(this);
         
         showinfo(s);
 
@@ -126,6 +131,9 @@ public class AdminPage implements ActionListener{
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        
+        if(e.getSource() == logout) {
+            window.dispose();
+            new Admin_Employee_login();
+        }
     }
 }
