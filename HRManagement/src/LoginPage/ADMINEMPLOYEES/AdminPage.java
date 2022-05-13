@@ -1,18 +1,19 @@
 package LoginPage.ADMINEMPLOYEES;
 
-import com.managementhr.loginPrompt;
+//import com.managementhr.loginPrompt;
 
 import LoginPage.Admin_Employee_login;
 
-import javax.swing.*;
+import javax.swing.*;                               
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.Scanner;
 import java.awt.*;
 
 public class AdminPage implements ActionListener {
 
     ImageIcon pfp = new ImageIcon("HRManagement/src/LoginPage/ADMINEMPLOYEES/images/blankpfp.png");
-    JLabel name = new JLabel();
     JFrame window = new JFrame("Admin Dashboard");
     JPanel leftpanel = new JPanel();
     JPanel toppanel = new JPanel();
@@ -23,13 +24,19 @@ public class AdminPage implements ActionListener {
     JButton aboutInfo = new JButton("About Admin");
     JButton logout = new JButton("Log Out");
 
-    public AdminPage(String s) {
+    JLabel name = new JLabel();
+    JLabel ID = new JLabel();
+    JLabel JoinedDate = new JLabel();
+
+    String AdminCsvPath = "HRManagement/src/LoginPage/ADMINEMPLOYEES/csvs/Admins.csv";
+
+    public AdminPage(String AdminName) {
 
         
         //window
         window.getContentPane().setBackground(Color.white);
         window.setSize(1280, 700);
-        window.setResizable(true);
+        window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         
         
@@ -95,12 +102,15 @@ public class AdminPage implements ActionListener {
         logout.setIcon(new ImageIcon("HRManagement/src/LoginPage/ADMINEMPLOYEES/images/logoutico.png"));
         logout.addActionListener(this);
         
-        showinfo(s);
 
         window.add(toppanel, BorderLayout.NORTH);
         window.add(leftpanel, BorderLayout.WEST);
         window.add(centerpanel, BorderLayout.CENTER);
         
+        showinfo(AdminName, AdminCsvPath);
+
+        centerpanel.add(ID);
+        centerpanel.add(JoinedDate);
 
         leftpanel.add(addEmp);
         leftpanel.add(remEmp);
@@ -114,18 +124,53 @@ public class AdminPage implements ActionListener {
     }
 
     public static void main(String[] args) {
-        new AdminPage("Hello");
+        new AdminPage("Dnyaneshwari Landge");
     }
 
-    public void showinfo(String args) {
+    public void setLabels(String uname, String uid, String ujdate) {
 
-        //Name
-        name.setText(args);
+        //****Name***** */
+        name.setText(uname);
         name.setIcon(pfp);
-        name.setFont(new Font("Roboto", 10, 30));
+        name.setFont(new Font("Roboto", Font.PLAIN, 30));
         name.setHorizontalTextPosition(JLabel.RIGHT);
         name.setForeground(Color.WHITE);
-        name.setBounds(0, 0, 350, 100);
+        name.setBounds(0, 0, 600, 100);
+
+        ID.setText(uid);
+        ID.setFont(new Font("Roboto", Font.PLAIN, 15));
+        ID.setBounds(100, 100, 350, 30);
+
+        JoinedDate.setText(ujdate);
+        JoinedDate.setFont(new Font("Roboto", Font.PLAIN, 15));
+        JoinedDate.setBounds(100, 140, 350, 30);
+    }
+
+    public void showinfo(String searchTerm, String csvPath) {
+        boolean found = false;
+        String uid = "", uname = "", ujdate = "";
+
+        try {
+            Scanner in = new Scanner(new File(csvPath));
+            in.useDelimiter("[,\n]");
+            
+            while(in.hasNext() && !found) {
+                uname = in.next();
+                uid = in.next();
+                ujdate = in.next();
+
+                if(uname.equals(searchTerm)) {
+                    found = true;
+                }
+            }
+
+            if(found) {
+                setLabels(uname, uid, ujdate);
+            }
+
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Admin User not found!");
+        }
         
     }
 
