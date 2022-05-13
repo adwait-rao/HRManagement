@@ -1,39 +1,52 @@
 package LoginPage.ADMINEMPLOYEES;
 
 import javax.swing.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.*;
 
-public class AdminPage {
+public class AdminPage implements ActionListener{
 
-    public AdminPage() {
+    ImageIcon pfp = new ImageIcon("HRManagement/src/LoginPage/ADMINEMPLOYEES/images/blankpfp.png");
+    JLabel name = new JLabel();
+    JFrame window = new JFrame("Admin Dashboard");
+    JPanel leftpanel = new JPanel();
+    JPanel toppanel = new JPanel();
+    JPanel centerpanel = new JPanel();
+    JButton addEmp = new JButton("Add Employee");
+    JButton remEmp = new JButton("Remove Employee");
+    JButton viewEmp = new JButton("View Employee");
+    JButton aboutInfo = new JButton("About Admin");
+    JButton logout = new JButton("Log Out");
 
-        JFrame window = new JFrame("Admin Dashboard");
+    public AdminPage(String s) {
+
+        
+        //window
         window.getContentPane().setBackground(Color.white);
         window.setSize(1280, 700);
         window.setResizable(true);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-
-        ImageIcon pfp = new ImageIcon("HRManagement/src/LoginPage/ADMINEMPLOYEES/images/blankpfp.png");
         
-        JLabel name = new JLabel("Your Name");
-        name.setIcon(pfp);
-        name.setFont(new Font("Roboto", 10, 30));
-        name.setHorizontalTextPosition(JLabel.RIGHT);
-        name.setForeground(Color.WHITE);
-        name.setBounds(0, 0, 350, 100);
-
-        JPanel leftpanel = new JPanel();
+        
+        //leftpanel
         leftpanel.setBackground(Color.DARK_GRAY);
         leftpanel.setPreferredSize(new Dimension(250, 100));
         leftpanel.setLayout(new GridLayout(8, 1));
         
-        JPanel toppanel = new JPanel();
+        
+        //toppanel
         toppanel.setBackground(Color.black);
         toppanel.setPreferredSize(new Dimension(250, 100));
-        //toppanel.setLayout(new GridLayout(1, 3, 20, 20));
         toppanel.setLayout(null);
 
-        JButton addEmp = new JButton("Add Employee");
+        
+        //centerpanel
+        centerpanel.setBackground(Color.white);
+        centerpanel.setLayout(null);
+
+        
+        //add employee
         addEmp.setContentAreaFilled(false); 
         addEmp.setBorderPainted(true);
         addEmp.setFocusPainted(true); 
@@ -41,7 +54,8 @@ public class AdminPage {
         addEmp.setOpaque(false);
         addEmp.setForeground(Color.WHITE);
         
-        JButton remEmp = new JButton("Remove Employee");
+        
+        //remove employee
         remEmp.setContentAreaFilled(false); 
         remEmp.setBorderPainted(true);
         remEmp.setFocusPainted(true); 
@@ -49,7 +63,8 @@ public class AdminPage {
         remEmp.setOpaque(false);
         remEmp.setForeground(Color.WHITE);
 
-        JButton viewEmp = new JButton("View Employee");
+        
+        //view employee
         viewEmp.setContentAreaFilled(false); 
         viewEmp.setBorderPainted(true);
         viewEmp.setFocusPainted(true); 
@@ -57,7 +72,15 @@ public class AdminPage {
         viewEmp.setOpaque(false);
         viewEmp.setForeground(Color.WHITE);
 
-        JButton logout = new JButton("Log Out");
+        //aboutInfo
+        aboutInfo.setContentAreaFilled(false); 
+        aboutInfo.setBorderPainted(true);
+        aboutInfo.setFocusPainted(true); 
+        aboutInfo.setFocusable(false);
+        aboutInfo.setOpaque(false);
+        aboutInfo.setForeground(Color.WHITE);
+        
+        //logout button
         logout.setContentAreaFilled(false); 
         logout.setBorderPainted(true);
         logout.setFocusPainted(true); 
@@ -67,26 +90,42 @@ public class AdminPage {
         logout.setBounds(1100, 35, 150, 30);
         logout.setIcon(new ImageIcon("HRManagement/src/LoginPage/ADMINEMPLOYEES/images/logoutico.png"));
         
-    
+        showinfo(s);
 
         window.add(toppanel, BorderLayout.NORTH);
         window.add(leftpanel, BorderLayout.WEST);
+        window.add(centerpanel, BorderLayout.CENTER);
         
-        //extra label to add space
-        JLabel ext = new JLabel("Joined on 20");
 
         leftpanel.add(addEmp);
         leftpanel.add(remEmp);
         leftpanel.add(viewEmp);
+        leftpanel.add(aboutInfo);
 
         toppanel.add(name);
-        toppanel.add(ext);
         toppanel.add(logout);
         
         window.setVisible(true);
     }
 
     public static void main(String[] args) {
-        new AdminPage();
+        new AdminPage("Hello");
+    }
+
+    public void showinfo(String args) {
+
+        //Name
+        name.setText(args);
+        name.setIcon(pfp);
+        name.setFont(new Font("Roboto", 10, 30));
+        name.setHorizontalTextPosition(JLabel.RIGHT);
+        name.setForeground(Color.WHITE);
+        name.setBounds(0, 0, 350, 100);
+        
+    }
+
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        
     }
 }
