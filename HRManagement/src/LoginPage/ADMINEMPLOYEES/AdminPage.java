@@ -4,7 +4,7 @@ package LoginPage.ADMINEMPLOYEES;
 
 import LoginPage.Admin_Employee_login;
 
-import javax.swing.*;                               
+import javax.swing.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.File;
@@ -32,81 +32,73 @@ public class AdminPage implements ActionListener {
 
     public AdminPage(String AdminName) {
 
-        
-        //window
+        // window
         window.getContentPane().setBackground(Color.white);
         window.setSize(1280, 700);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
-        
-        //leftpanel
+
+        // leftpanel
         leftpanel.setBackground(Color.DARK_GRAY);
         leftpanel.setPreferredSize(new Dimension(250, 100));
         leftpanel.setLayout(new GridLayout(8, 1));
-        
-        
-        //toppanel
+
+        // toppanel
         toppanel.setBackground(Color.black);
         toppanel.setPreferredSize(new Dimension(250, 100));
         toppanel.setLayout(null);
 
-        
-        //centerpanel
+        // centerpanel
         centerpanel.setBackground(Color.white);
         centerpanel.setLayout(null);
 
-        
-        //add employee
-        addEmp.setContentAreaFilled(false); 
+        // add employee
+        addEmp.setContentAreaFilled(false);
         addEmp.setBorderPainted(true);
-        addEmp.setFocusPainted(true); 
+        addEmp.setFocusPainted(true);
         addEmp.setFocusable(false);
         addEmp.setOpaque(false);
         addEmp.setForeground(Color.WHITE);
-        
-        
-        //remove employee
-        remEmp.setContentAreaFilled(false); 
+
+        // remove employee
+        remEmp.setContentAreaFilled(false);
         remEmp.setBorderPainted(true);
-        remEmp.setFocusPainted(true); 
+        remEmp.setFocusPainted(true);
         remEmp.setFocusable(false);
         remEmp.setOpaque(false);
         remEmp.setForeground(Color.WHITE);
 
-        
-        //view employee
-        viewEmp.setContentAreaFilled(false); 
+        // view employee
+        viewEmp.setContentAreaFilled(false);
         viewEmp.setBorderPainted(true);
-        viewEmp.setFocusPainted(true); 
+        viewEmp.setFocusPainted(true);
         viewEmp.setFocusable(false);
         viewEmp.setOpaque(false);
         viewEmp.setForeground(Color.WHITE);
 
-        //aboutInfo
-        aboutInfo.setContentAreaFilled(false); 
+        // aboutInfo
+        aboutInfo.setContentAreaFilled(false);
         aboutInfo.setBorderPainted(true);
-        aboutInfo.setFocusPainted(true); 
+        aboutInfo.setFocusPainted(true);
         aboutInfo.setFocusable(false);
         aboutInfo.setOpaque(false);
         aboutInfo.setForeground(Color.WHITE);
-        
-        //logout button
-        logout.setContentAreaFilled(false); 
+
+        // logout button
+        logout.setContentAreaFilled(false);
         logout.setBorderPainted(true);
-        logout.setFocusPainted(true); 
+        logout.setFocusPainted(true);
         logout.setFocusable(false);
         logout.setOpaque(false);
         logout.setForeground(Color.WHITE);
         logout.setBounds(1100, 35, 150, 30);
         logout.setIcon(new ImageIcon("HRManagement/src/LoginPage/ADMINEMPLOYEES/images/logoutico.png"));
         logout.addActionListener(this);
-        
 
         window.add(toppanel, BorderLayout.NORTH);
         window.add(leftpanel, BorderLayout.WEST);
         window.add(centerpanel, BorderLayout.CENTER);
-        
+
         showinfo(AdminName, AdminCsvPath);
 
         centerpanel.add(ID);
@@ -119,17 +111,17 @@ public class AdminPage implements ActionListener {
 
         toppanel.add(name);
         toppanel.add(logout);
-        
+
         window.setVisible(true);
     }
 
-    public static void main(String[] args) {
-        new AdminPage("Dnyaneshwari Landge");
-    }
+    /*public static void main(String[] args) {
+        new AdminPage("Heramb Bhoodhar");
+    }*/
 
     public void setLabels(String uname, String uid, String ujdate) {
 
-        //****Name***** */
+        // ****Name***** */
         name.setText(uname);
         name.setIcon(pfp);
         name.setFont(new Font("Roboto", Font.PLAIN, 30));
@@ -137,11 +129,11 @@ public class AdminPage implements ActionListener {
         name.setForeground(Color.WHITE);
         name.setBounds(0, 0, 600, 100);
 
-        ID.setText(uid);
+        ID.setText("ID : " + uid);
         ID.setFont(new Font("Roboto", Font.PLAIN, 15));
         ID.setBounds(100, 100, 350, 30);
 
-        JoinedDate.setText(ujdate);
+        JoinedDate.setText("Joined Date : " + ujdate);
         JoinedDate.setFont(new Font("Roboto", Font.PLAIN, 15));
         JoinedDate.setBounds(100, 140, 350, 30);
     }
@@ -153,30 +145,30 @@ public class AdminPage implements ActionListener {
         try {
             Scanner in = new Scanner(new File(csvPath));
             in.useDelimiter("[,\n]");
-            
-            while(in.hasNext() && !found) {
+
+            while (in.hasNext() && !found) {
                 uname = in.next();
                 uid = in.next();
                 ujdate = in.next();
 
-                if(uname.equals(searchTerm)) {
+                if (uname.equals(searchTerm)) {
                     found = true;
                 }
             }
 
-            if(found) {
+            if (found) {
                 setLabels(uname, uid, ujdate);
             }
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Admin User not found!");
         }
-        
+
     }
 
     @Override
     public void actionPerformed(ActionEvent e) {
-        if(e.getSource() == logout) {
+        if (e.getSource() == logout) {
             window.dispose();
             new Admin_Employee_login();
         }
