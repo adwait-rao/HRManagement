@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 public class Admin_Employee_login implements ActionListener {
-    ImageIcon image = new ImageIcon("HRManagement/src/LoginPage/hrmgr2.png");
+    ImageIcon image = new ImageIcon("C:\\Java Project HR Management\\HRManagement\\HRManagement\\src\\LoginPage\\hrmgr2.png");
 
     JButton admin = new JButton("Admin Login");
     JButton Employee = new JButton("Employee Login");
@@ -35,7 +35,7 @@ public class Admin_Employee_login implements ActionListener {
         Employee.setFocusable(false);
         admin.setFont(new Font("Comic Sans", Font.BOLD,18));
         Employee.setFont(new Font("Comic Sans", Font.BOLD,18));
-        admin.setForeground(Color.BLACK);
+        admin.setForeground(Color.black);
         Employee.setForeground(Color.BLACK);
         admin.setBackground(Color.LIGHT_GRAY);
         Employee.setBackground(Color.LIGHT_GRAY);

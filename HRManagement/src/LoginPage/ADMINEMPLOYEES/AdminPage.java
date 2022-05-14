@@ -27,7 +27,9 @@ public class AdminPage implements ActionListener {
     JLabel name = new JLabel();
     JLabel ID = new JLabel();
     JLabel JoinedDate = new JLabel();
-
+    JLabel Role = new JLabel();
+    JLabel Sal = new JLabel();
+    JLabel ConNo = new JLabel();
     String AdminCsvPath = "HRManagement/src/LoginPage/ADMINEMPLOYEES/csvs/Admins.csv";
 
     public AdminPage(String AdminName) {
@@ -59,6 +61,7 @@ public class AdminPage implements ActionListener {
         addEmp.setFocusable(false);
         addEmp.setOpaque(false);
         addEmp.setForeground(Color.WHITE);
+        addEmp.setFont(new Font("Roboto", Font.BOLD ,17));
 
         // remove employee
         remEmp.setContentAreaFilled(false);
@@ -67,7 +70,7 @@ public class AdminPage implements ActionListener {
         remEmp.setFocusable(false);
         remEmp.setOpaque(false);
         remEmp.setForeground(Color.WHITE);
-
+        remEmp.setFont(new Font("Roboto", Font.BOLD ,17));
         // view employee
         viewEmp.setContentAreaFilled(false);
         viewEmp.setBorderPainted(true);
@@ -75,7 +78,7 @@ public class AdminPage implements ActionListener {
         viewEmp.setFocusable(false);
         viewEmp.setOpaque(false);
         viewEmp.setForeground(Color.WHITE);
-
+        viewEmp.setFont(new Font("Roboto", Font.BOLD ,17));
         // aboutInfo
         aboutInfo.setContentAreaFilled(false);
         aboutInfo.setBorderPainted(true);
@@ -83,7 +86,7 @@ public class AdminPage implements ActionListener {
         aboutInfo.setFocusable(false);
         aboutInfo.setOpaque(false);
         aboutInfo.setForeground(Color.WHITE);
-
+        aboutInfo.setFont(new Font("Roboto", Font.BOLD ,17));
         // logout button
         logout.setContentAreaFilled(false);
         logout.setBorderPainted(true);
@@ -103,6 +106,9 @@ public class AdminPage implements ActionListener {
 
         centerpanel.add(ID);
         centerpanel.add(JoinedDate);
+        centerpanel.add(Role);
+        centerpanel.add(Sal);
+        centerpanel.add(ConNo);
 
         leftpanel.add(addEmp);
         leftpanel.add(remEmp);
@@ -115,32 +121,70 @@ public class AdminPage implements ActionListener {
         window.setVisible(true);
     }
 
-    /*public static void main(String[] args) {
+    public static void main(String[] args) {
         new AdminPage("Heramb Bhoodhar");
-    }*/
+    }
 
-    public void setLabels(String uname, String uid, String ujdate) {
+    public void setLabels(String uname, String uid, String ujdate,String role,String sal,String con) {
 
         // ****Name***** */
+        JLabel a1 = new JLabel(uid);
+        a1.setFont(new Font("Roboto", Font.BOLD ,25));
+        a1.setBounds(370, 100, 350, 30);
+
+        JLabel a2 = new JLabel(ujdate);
+        a2.setFont(new Font("Roboto", Font.BOLD ,25));
+        a2.setBounds(370, 170, 350, 30);
+
+        JLabel a3 = new JLabel(role);
+        a3.setFont(new Font("Roboto", Font.BOLD, 25));
+        a3.setBounds(370, 230, 750, 50);
+
+        JLabel a4 = new JLabel(sal);
+        a4.setFont(new Font("Roboto", Font.BOLD, 25));
+        a4.setBounds(370, 300, 750, 50);
+
+        JLabel a5 = new JLabel(con);
+        a5.setFont(new Font("Roboto", Font.BOLD, 25));
+        a5.setBounds(370, 370, 750, 50);
+
+        centerpanel.add(a1);
+        centerpanel.add(a2);
+        centerpanel.add(a3);
+        centerpanel.add(a4);
+        centerpanel.add(a5);
+
         name.setText(uname);
         name.setIcon(pfp);
-        name.setFont(new Font("Roboto", Font.PLAIN, 30));
+        name.setFont(new Font("Noto Sans", Font.BOLD, 30));
         name.setHorizontalTextPosition(JLabel.RIGHT);
         name.setForeground(Color.WHITE);
         name.setBounds(0, 0, 600, 100);
 
-        ID.setText("ID : " + uid);
-        ID.setFont(new Font("Roboto", Font.PLAIN, 15));
+        ID.setText("ID : ");
+        ID.setFont(new Font("Roboto", Font.BOLD ,25));
         ID.setBounds(100, 100, 350, 30);
 
-        JoinedDate.setText("Joined Date : " + ujdate);
-        JoinedDate.setFont(new Font("Roboto", Font.PLAIN, 15));
-        JoinedDate.setBounds(100, 140, 350, 30);
+        JoinedDate.setText("Joined Date : ");
+        JoinedDate.setFont(new Font("Roboto", Font.BOLD, 25));
+        JoinedDate.setBounds(100, 170, 350, 30);
+
+        Role.setText("Role : " );
+        Role.setFont(new Font("Roboto", Font.BOLD, 25));
+        Role.setBounds(100, 230, 350, 50);
+
+        Sal.setText("Salary : ");
+        Sal.setFont(new Font("Roboto", Font.BOLD, 25));
+        Sal.setBounds(100, 300, 350, 50);
+
+        ConNo.setText("Contact No : ");
+        ConNo.setFont(new Font("Roboto", Font.BOLD, 25));
+        ConNo.setBounds(100, 370, 350, 50);
     }
 
     public void showinfo(String searchTerm, String csvPath) {
         boolean found = false;
-        String uid = "", uname = "", ujdate = "";
+        String uid = "", uname = "", ujdate = "",role = " ",sal=" ",con= " ";
 
         try {
             Scanner in = new Scanner(new File(csvPath));
@@ -150,14 +194,16 @@ public class AdminPage implements ActionListener {
                 uname = in.next();
                 uid = in.next();
                 ujdate = in.next();
-
+                role = in.next();
+                sal = in.next();
+                con = in.next();
                 if (uname.equals(searchTerm)) {
                     found = true;
                 }
             }
 
             if (found) {
-                setLabels(uname, uid, ujdate);
+                setLabels(uname, uid, ujdate , role, sal , con);
             }
 
         } catch (Exception e) {
