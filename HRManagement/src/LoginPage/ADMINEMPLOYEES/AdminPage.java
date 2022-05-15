@@ -31,8 +31,11 @@ public class AdminPage implements ActionListener {
     JLabel Sal = new JLabel();
     JLabel ConNo = new JLabel();
     String AdminCsvPath = "HRManagement/src/LoginPage/ADMINEMPLOYEES/csvs/Admins.csv";
+    String AdminNameGlobal;
 
     public AdminPage(String AdminName) {
+
+        AdminNameGlobal = AdminName;
 
         // window
         window.getContentPane().setBackground(Color.white);
@@ -71,6 +74,7 @@ public class AdminPage implements ActionListener {
         remEmp.setOpaque(false);
         remEmp.setForeground(Color.WHITE);
         remEmp.setFont(new Font("Roboto", Font.BOLD ,17));
+
         // view employee
         viewEmp.setContentAreaFilled(false);
         viewEmp.setBorderPainted(true);
@@ -79,6 +83,7 @@ public class AdminPage implements ActionListener {
         viewEmp.setOpaque(false);
         viewEmp.setForeground(Color.WHITE);
         viewEmp.setFont(new Font("Roboto", Font.BOLD ,17));
+
         // aboutInfo
         aboutInfo.setContentAreaFilled(false);
         aboutInfo.setBorderPainted(true);
@@ -87,6 +92,8 @@ public class AdminPage implements ActionListener {
         aboutInfo.setOpaque(false);
         aboutInfo.setForeground(Color.WHITE);
         aboutInfo.setFont(new Font("Roboto", Font.BOLD ,17));
+        aboutInfo.addActionListener(this);
+
         // logout button
         logout.setContentAreaFilled(false);
         logout.setBorderPainted(true);
@@ -204,10 +211,12 @@ public class AdminPage implements ActionListener {
 
             if (found) {
                 setLabels(uname, uid, ujdate , role, sal , con);
+            } else {
+                throw new Exception("Admin User Not Found!");
             }
 
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Admin User not found!");
+            JOptionPane.showMessageDialog(null, e);
         }
 
     }
@@ -218,5 +227,13 @@ public class AdminPage implements ActionListener {
             window.dispose();
             new Admin_Employee_login();
         }
+
+        if (e.getSource() == aboutInfo) 
+        {
+            showinfo(AdminNameGlobal, AdminCsvPath);
+            
+        }
+
+
     }
 }
