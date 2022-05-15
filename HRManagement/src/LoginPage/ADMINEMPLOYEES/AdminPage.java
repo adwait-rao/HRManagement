@@ -1,20 +1,21 @@
-package LoginPage.ADMINEMPLOYEES;
+
+        package LoginPage.ADMINEMPLOYEES;
 
 //import com.managementhr.loginPrompt;
 
-import LoginPage.Admin_Employee_login;
-import com.managementhr.loginPromptEmployee;
+        import LoginPage.Admin_Employee_login;
+        import com.managementhr.loginPromptEmployee;
 
-import javax.imageio.plugins.tiff.TIFFDirectory;
-import javax.management.Query;
-import javax.swing.*;
-import javax.swing.plaf.ColorUIResource;
+        import javax.imageio.plugins.tiff.TIFFDirectory;
+        import javax.management.Query;
+        import javax.swing.*;
+        import javax.swing.plaf.ColorUIResource;
 
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.io.*;
-import java.util.Scanner;
-import java.awt.*;
+        import java.awt.event.ActionEvent;
+        import java.awt.event.ActionListener;
+        import java.io.*;
+        import java.util.Scanner;
+        import java.awt.*;
 
 public class AdminPage implements ActionListener {
 
@@ -57,7 +58,7 @@ public class AdminPage implements ActionListener {
 
     String AdminCsvPath = "Admins.csv";
     String EmployeeCsvPath = "employees.csv";
-
+    String filepath2 = "employeenamepass.csv";
     String AdminNameGlobal;
 
     public AdminPage(String AdminName) {
@@ -112,7 +113,7 @@ public class AdminPage implements ActionListener {
         viewEmp.setOpaque(false);
         viewEmp.setForeground(Color.WHITE);
         viewEmp.setFont(new Font("Roboto", Font.BOLD, 17));
-
+        viewEmp.addActionListener(this);
         // aboutInfo
         aboutInfo.setContentAreaFilled(false);
         aboutInfo.setBorderPainted(true);
@@ -328,7 +329,7 @@ public class AdminPage implements ActionListener {
         centerpanel.add(Add);
     }
 
-    private void employee_data_submition(String[] arr, String path) {
+    private void employee_data_submition(String[] arr, String path,String path1) {
         try {
             FileWriter fw = new FileWriter(path, true);
             BufferedWriter bw = new BufferedWriter(fw);
@@ -337,6 +338,13 @@ public class AdminPage implements ActionListener {
                     + "," + arr[5] + "," + arr[6] + "," + arr[7]);
             pw.flush();
             pw.close();
+
+            FileWriter fw1= new FileWriter(path1,true);
+            BufferedWriter bw1 = new BufferedWriter(fw1);
+            PrintWriter pw1 = new PrintWriter(bw1);
+            pw1.println(arr[0]+","+arr[1]);
+            pw1.flush();
+            pw1.close();
             JOptionPane.showMessageDialog(null, "DATA SAVED SUCCESSFULLY", "Admin Login",
                     JOptionPane.INFORMATION_MESSAGE);
         } catch (Exception e) {
@@ -422,7 +430,41 @@ public class AdminPage implements ActionListener {
         }
 
     }
+    private void labels(String s,String p,int y,int i)
+    {
+        JLabel empname1 = new JLabel();
+        JLabel emppass1 = new JLabel();
+        empname1.setText(i+") "+"Name:- "+s);
+        empname1.setFont(new Font("Roboto", Font.PLAIN, 20));
+        empname1.setBounds(100, y, 350, 30);
 
+        emppass1.setText("Password - "+p);
+        emppass1.setFont(new Font("Roboto", Font.PLAIN, 20));
+        emppass1.setBounds(400, y, 350, 30);
+
+        centerpanel.add(empname1);
+        centerpanel.add(emppass1);
+    }
+    private void displayempdetails(String filepath2) {
+        String name = "", pass= "";
+        int x =100,y=0,i=1;
+        try {
+            Scanner in = new Scanner(new File(filepath2));
+            in.useDelimiter("[,\n]");
+
+            while (in.hasNext()) {
+                y = y+50;
+                name = in.next();
+                pass = in.next();
+                labels(name,pass,y,i);
+                i++;
+            }
+
+        }
+        catch (Exception e) {
+            JOptionPane.showMessageDialog(null, e);
+        }
+    }
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == logout) {
@@ -465,7 +507,7 @@ public class AdminPage implements ActionListener {
                     arr[5] = mobileNo.getText();
                     arr[6] = quali.getText();
                     arr[7] = Role_1.getText();
-                    employee_data_submition(arr, EmployeeCsvPath);
+                    employee_data_submition(arr, EmployeeCsvPath,filepath2);
                 }
             }
         }
@@ -495,6 +537,15 @@ public class AdminPage implements ActionListener {
             }
 
         }
+        if(e.getSource() == viewEmp)
+        {
+            centerpanel.revalidate();
+            centerpanel.repaint();
+            centerpanel.removeAll();
+            displayempdetails(filepath2);
+        }
+
+
     }
 
 }
