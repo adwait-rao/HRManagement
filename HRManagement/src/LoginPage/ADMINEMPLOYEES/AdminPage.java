@@ -246,7 +246,7 @@ public class AdminPage implements ActionListener {
 
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
-            
+
         }
     }
 
@@ -333,8 +333,8 @@ public class AdminPage implements ActionListener {
             FileWriter fw = new FileWriter(path, true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            pw.println(arr[0] + "," + arr[1] + "," + arr[2] + "," + arr[3] + "," + arr[4] 
-            + "," + arr[5] + "," + arr[6] + "," + arr[7]);
+            pw.println(arr[0] + "," + arr[1] + "," + arr[2] + "," + arr[3] + "," + arr[4]
+                    + "," + arr[5] + "," + arr[6] + "," + arr[7]);
             pw.flush();
             pw.close();
             JOptionPane.showMessageDialog(null, "DATA SAVED SUCCESSFULLY", "Admin Login",
@@ -345,11 +345,11 @@ public class AdminPage implements ActionListener {
         }
     }
 
-    JButton SearchAndDelete  = new JButton("Search And Delete");
+    JButton SearchAndDelete = new JButton("Search And Delete");
     JTextField SearchTerm = new JTextField();
 
     private void removeEmployee() {
-        
+
         JLabel QueryText1 = new JLabel("Search Employee By Mobile Number: ");
         QueryText1.setFont(new Font("Roboto", Font.PLAIN, 25));
         QueryText1.setBounds(100, 40, 500, 30);
@@ -372,12 +372,12 @@ public class AdminPage implements ActionListener {
         centerpanel.add(SearchAndDelete);
     }
 
-    private void employee_data_removal(String SearchTerm, String FilePath) {
+    private void employee_data_removal(String SearchTerm, String FilePath) throws Exception{
         String tempFile = "temp.csv";
         File oldFile = new File(FilePath);
         File newFile = new File(tempFile);
-
-        String[] details = {"", "", "", "", "", "", "", ""};
+        boolean wasfound = false;
+        String[] details = { "", "", "", "", "", "", "", "" };
 
         try {
             FileWriter fw = new FileWriter(tempFile, true);
@@ -386,8 +386,8 @@ public class AdminPage implements ActionListener {
             Scanner in = new Scanner(new File(FilePath));
             in.useDelimiter("[,\n]");
 
-            while(in.hasNext()) {
-                
+            while (in.hasNext()) {
+
                 details[0] = in.next();
                 details[1] = in.next();
                 details[2] = in.next();
@@ -397,9 +397,14 @@ public class AdminPage implements ActionListener {
                 details[6] = in.next();
                 details[7] = in.next();
 
+                if (details[5].equals(SearchTerm))
+                {
+                    wasfound = true;
+                }
+
                 if (!details[5].equals(SearchTerm)) {
-                    pw.println(details[0] + "," + details[1] + "," + details[2] + "," +details[3] + 
-                    "," + details[4] + "," + details[5] + "," + details[6] + "," + details[7] );
+                    pw.println(details[0] + "," + details[1] + "," + details[2] + "," + details[3] +
+                            "," + details[4] + "," + details[5] + "," + details[6] + "," + details[7]);
                 }
             }
             in.close();
@@ -408,10 +413,13 @@ public class AdminPage implements ActionListener {
             oldFile.delete();
             File Updated = new File(FilePath);
             newFile.renameTo(Updated);
+            if(!wasfound) {
+                throw new Exception("No Employee Found!");
+            }
             JOptionPane.showMessageDialog(null, "Employee Record deleted Successfully!");
 
-        } catch(Exception e) {
-            JOptionPane.showMessageDialog(null, e);
+        } catch (Exception f) {
+            JOptionPane.showMessageDialog(null, f);
         }
 
     }
@@ -463,21 +471,32 @@ public class AdminPage implements ActionListener {
             }
         }
 
-        if(e.getSource() == remEmp) {
+        if (e.getSource() == remEmp) {
             centerpanel.revalidate();
             centerpanel.repaint();
             centerpanel.removeAll();
             removeEmployee();
         }
 
-        if(e.getSource() == SearchAndDelete) {
-            int x = JOptionPane.showConfirmDialog(null, "Do You Want To Delete The Searched Record?", "Confirm Delete", JOptionPane.YES_NO_OPTION);
-            String SearchKey = SearchTerm.getText();
-            if (x == 0) {
-                employee_data_removal(SearchKey, EmployeeCsvPath);
-            }
-        }
+        if (e.getSource() == SearchAndDelete) {
+            int x = JOptionPane.showConfirmDialog(null, "Do You Want To Delete The Searched Record?", "Confirm Delete",
+                    JOptionPane.YES_NO_OPTION);
+                    if (x == 0) {
+                        if (SearchTerm.getText().equals("")) {
+                            JOptionPane.showMessageDialog(null, "Please Enter mobile number!", "Error",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                                    
+                        } else {
+                            try {
+                                employee_data_removal(SearchTerm.getText(), EmployeeCsvPath);
+                            } catch (Exception d) {
+                                JOptionPane.showMessageDialog(null, d, "Error",
+                                    JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        }
+                }
 
+        }
     }
 
 }
