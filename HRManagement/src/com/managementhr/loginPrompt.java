@@ -99,7 +99,7 @@ public class loginPrompt implements ActionListener {
                         frame.dispose();
                     }*/
 
-                    new AdminPage(userID,1);
+                    new AdminPage(userID);
                     frame.dispose();
 
                 } else {
