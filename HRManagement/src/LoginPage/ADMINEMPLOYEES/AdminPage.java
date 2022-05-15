@@ -2,6 +2,7 @@ package LoginPage.ADMINEMPLOYEES;
 
 //import com.managementhr.loginPrompt;
 
+        import LoginPage.AdminAndEmployeeIDPASS.EmployeeIDPass;
         import LoginPage.Admin_Employee_login;
         import com.managementhr.loginPromptEmployee;
 
@@ -14,6 +15,7 @@ package LoginPage.ADMINEMPLOYEES;
         import java.io.*;
         import java.util.Scanner;
         import java.awt.*;
+        import java.util.Vector;
 
 public class AdminPage implements ActionListener {
 
@@ -35,6 +37,8 @@ public class AdminPage implements ActionListener {
     JLabel Role = new JLabel();
     JLabel Sal = new JLabel();
     JLabel ConNo = new JLabel();
+    JLabel empname1 = new JLabel();
+    JLabel emppass  = new JLabel();
 
     JTextField empname = new JTextField();
     JTextField emppassword = new JTextField();
@@ -57,6 +61,7 @@ public class AdminPage implements ActionListener {
     String AdminCsvPath = "HRManagement/src/LoginPage/ADMINEMPLOYEES/csvs/Admins.csv";
     String AdminNameGlobal;
     String filepath = "HRManagement/src/LoginPage/ADMINEMPLOYEES/csvs/employees.csv";
+    String path1 = "HRManagement/src/LoginPage/ADMINEMPLOYEES/csvs/EmployeeUsernamePass.csv";
     public AdminPage(String AdminName) {
 
         AdminNameGlobal = AdminName;
@@ -108,6 +113,7 @@ public class AdminPage implements ActionListener {
         viewEmp.setOpaque(false);
         viewEmp.setForeground(Color.WHITE);
         viewEmp.setFont(new Font("Roboto", Font.BOLD, 17));
+        viewEmp.addActionListener(this);
 
         // aboutInfo
         aboutInfo.setContentAreaFilled(false);
@@ -217,6 +223,48 @@ public class AdminPage implements ActionListener {
         centerpanel.add(Sal);
         centerpanel.add(ConNo);
     }
+    private void lables(int i,String s,String p,int y)
+    {
+        JLabel empname1 = new JLabel();
+        JLabel emppass  = new JLabel();
+        empname1.setText(i+" ) "+"Name : " + s);
+        empname1.setFont(new Font("Roboto", Font.PLAIN, 20));
+        empname1.setBounds(100, y, 350, 30);
+
+        emppass.setText("Pass : " + p);
+        emppass.setFont(new Font("Roboto", Font.PLAIN, 20));
+        emppass.setBounds(400, y, 350, 30);
+
+        centerpanel.add(empname1);
+        centerpanel.add(emppass);
+    }
+    private void viewEmployees( String path1)
+    {
+        try
+        {
+            Scanner in = new Scanner(new File(path1));
+            int x = 100, y = 0,i =1;
+            in.useDelimiter("[,\n]");
+            String name = "",pass="";
+            while(in.hasNext())
+            {
+                y = y+50;
+                name = in.next();
+                pass = in.next();
+                lables(i,name,pass,y);
+                i++;
+            }
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, e.getMessage(), "Admin Login",
+                    JOptionPane.ERROR_MESSAGE);
+            System.out.println(e.getMessage());
+        }
+
+    }
+
+
 
     public void showinfo(String searchTerm, String csvPath) {
         boolean found = false;
@@ -327,18 +375,37 @@ public class AdminPage implements ActionListener {
         centerpanel.add(Add);
     }
 
-    private void employee_data_submition(String[] arr,String path)
+
+    private void employee_data_submition(String[] arr,String path,String path1)
     {
         try
         {
             FileWriter fw = new FileWriter(path,true);
             BufferedWriter bw = new BufferedWriter(fw);
             PrintWriter pw = new PrintWriter(bw);
-            pw.println(arr[0]+","+arr[1]+","+arr[2]+","+arr[3]+","+arr[4]+","+arr[5]+","+arr[6]+","+arr[7]+",");
+            pw.println(arr[0]+","+arr[1]+","+arr[2]+","+arr[3]+","+arr[4]+","+arr[5]+","+arr[6]+","+arr[7]);
             pw.flush();
             pw.close();
             JOptionPane.showMessageDialog(null, "DATA SAVED SUCCESSFULLY", "Admin Login",
                     JOptionPane.INFORMATION_MESSAGE);
+            EmployeeIDPass.putintoemployee(arr[0],arr[1]);
+        }
+        catch(Exception e)
+        {
+            JOptionPane.showMessageDialog(null, "ERROR IN SAVING DATA", "Admin Login",
+                    JOptionPane.ERROR_MESSAGE);
+        }
+
+        try
+        {
+
+            FileWriter fw1 = new FileWriter(path1,true);
+            BufferedWriter bw1 = new BufferedWriter(fw1);
+            PrintWriter pw1 = new PrintWriter(bw1);
+            pw1.println(arr[0]+","+arr[1]);
+            pw1.flush();
+            pw1.close();
+            EmployeeIDPass.putintoemployee(arr[0],arr[1]);
         }
         catch(Exception e)
         {
@@ -390,12 +457,22 @@ public class AdminPage implements ActionListener {
                     arr[5] = mobileNo.getText();
                     arr[6] = quali.getText();
                     arr[7] = Role_1.getText();
-                    employee_data_submition(arr,filepath);
+                    employee_data_submition(arr,filepath,path1);
                 }
             }
         }
+        if(e.getSource()==viewEmp)
+        {
+            centerpanel.revalidate();
+            centerpanel.repaint();
+            centerpanel.removeAll();
+
+            viewEmployees(path1);
+        }
 
     }
+
+
 
 
 }
