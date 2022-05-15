@@ -372,7 +372,7 @@ public class AdminPage implements ActionListener {
         centerpanel.add(SearchAndDelete);
     }
 
-    private void employee_data_removal(String SearchTerm, String FilePath) throws Exception{
+    private void employee_data_removal(String SearchTerm, String FilePath) throws Exception {
         String tempFile = "temp.csv";
         File oldFile = new File(FilePath);
         File newFile = new File(tempFile);
@@ -397,8 +397,7 @@ public class AdminPage implements ActionListener {
                 details[6] = in.next();
                 details[7] = in.next();
 
-                if (details[5].equals(SearchTerm))
-                {
+                if (details[5].equals(SearchTerm)) {
                     wasfound = true;
                 }
 
@@ -413,7 +412,7 @@ public class AdminPage implements ActionListener {
             oldFile.delete();
             File Updated = new File(FilePath);
             newFile.renameTo(Updated);
-            if(!wasfound) {
+            if (!wasfound) {
                 throw new Exception("No Employee Found!");
             }
             JOptionPane.showMessageDialog(null, "Employee Record deleted Successfully!");
@@ -481,20 +480,19 @@ public class AdminPage implements ActionListener {
         if (e.getSource() == SearchAndDelete) {
             int x = JOptionPane.showConfirmDialog(null, "Do You Want To Delete The Searched Record?", "Confirm Delete",
                     JOptionPane.YES_NO_OPTION);
-                    if (x == 0) {
-                        if (SearchTerm.getText().equals("")) {
-                            JOptionPane.showMessageDialog(null, "Please Enter mobile number!", "Error",
-                                    JOptionPane.INFORMATION_MESSAGE);
-                                    
-                        } else {
-                            try {
-                                employee_data_removal(SearchTerm.getText(), EmployeeCsvPath);
-                            } catch (Exception d) {
-                                JOptionPane.showMessageDialog(null, d, "Error",
-                                    JOptionPane.INFORMATION_MESSAGE);
-                            }
-                        }
+            if (x == 0) {
+                if (SearchTerm.getText().equals("")) {
+                    JOptionPane.showMessageDialog(null, "Please Enter mobile number!", "Error",
+                            JOptionPane.INFORMATION_MESSAGE);
+
+                } else {
+                    try {
+                        employee_data_removal(SearchTerm.getText(), EmployeeCsvPath);
+                    } catch (Exception d) {
+                        JOptionPane.showMessageDialog(null, d, "Error",JOptionPane.INFORMATION_MESSAGE);
+                    }
                 }
+            }
 
         }
     }
