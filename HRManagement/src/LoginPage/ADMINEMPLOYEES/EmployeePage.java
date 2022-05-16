@@ -64,6 +64,10 @@ public class EmployeePage {
 
     private void setlabels(String uname, String ujdate, String role, String sal, String con, String qual, String age1) {
 
+        centerpanel.revalidate();
+        centerpanel.repaint();
+        centerpanel.removeAll();
+
         JLabel a2 = new JLabel(ujdate);
         a2.setFont(new Font("Roboto", Font.BOLD, 25));
         a2.setBounds(370, 100, 350, 30);
@@ -152,7 +156,7 @@ public class EmployeePage {
                 quali = in.next();
                 role = in.next();
                 setlabels(uname1, joindate, sal, age, contact, quali, role);
-                if(uname.equals(uname1)) {
+                if (uname.equals(uname1)) {
                     found = true;
                 }
             }
