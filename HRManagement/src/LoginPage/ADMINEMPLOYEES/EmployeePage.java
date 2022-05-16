@@ -1,11 +1,16 @@
 package LoginPage.ADMINEMPLOYEES;
 
 import javax.swing.*;
+
+import LoginPage.Admin_Employee_login;
+
 import java.awt.*;
 import java.io.File;
 import java.util.Scanner;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
-public class EmployeePage {
+public class EmployeePage implements ActionListener{
     ImageIcon pfp = new ImageIcon("HRManagement/src/LoginPage/ADMINEMPLOYEES/images/blankpfp.png");
     JFrame window = new JFrame("Employee DashBoard");
     JPanel toppanel = new JPanel();
@@ -22,6 +27,8 @@ public class EmployeePage {
     JLabel quali = new JLabel();
     JLabel age = new JLabel();
 
+    JButton logout = new JButton("Log Out");
+
     public EmployeePage(String uname, String pass) {
         // name.setText("Heramb Bhoodhar");
         name.setIcon(pfp);
@@ -35,13 +42,24 @@ public class EmployeePage {
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         search(uname, pass);
-        toppanel.setBackground(new Color(124, 190, 207));
+        toppanel.setBackground(new Color(47, 173, 215));
         toppanel.setPreferredSize(new Dimension(250, 100));
         toppanel.setLayout(null);
 
         leftpanel.setBackground(new Color(120, 171, 235));
         leftpanel.setPreferredSize(new Dimension(50, 250));
         leftpanel.setLayout(null);
+
+        logout.setContentAreaFilled(false);
+        logout.setBorderPainted(true);
+        logout.setFocusPainted(true);
+        logout.setFocusable(false);
+        logout.setOpaque(true);
+        logout.setBackground(Color.BLACK);
+        logout.setForeground(Color.WHITE);
+        logout.setBounds(1100, 20, 150, 60);
+        logout.setIcon(new ImageIcon("HRManagement/src/LoginPage/ADMINEMPLOYEES/images/logoutico.png"));
+        logout.addActionListener(this);
 
         // rightpanel.setBackground(new Color(78, 245, 66));
         // rightpanel.setPreferredSize(new Dimension(50, 250));
@@ -55,6 +73,7 @@ public class EmployeePage {
         window.add(leftpanel, BorderLayout.WEST);
         // window.add(rightpanel, BorderLayout.EAST);
         toppanel.add(name);
+        toppanel.add(logout);
         window.setVisible(true);
     }
 
@@ -70,7 +89,7 @@ public class EmployeePage {
 
         JLabel a2 = new JLabel(ujdate);
         a2.setFont(new Font("Roboto", Font.BOLD, 25));
-        a2.setBounds(370, 100, 350, 30);
+        a2.setBounds(370, 100, 350, 50);
 
         JLabel a3 = new JLabel(role);
         a3.setFont(new Font("Roboto", Font.BOLD, 25));
@@ -86,11 +105,11 @@ public class EmployeePage {
 
         JLabel a5 = new JLabel(con);
         a5.setFont(new Font("Roboto", Font.BOLD, 25));
-        a5.setBounds(370, 370, 750, 50);
+        a5.setBounds(370, 380, 750, 50);
 
         JLabel a6 = new JLabel(qual);
         a6.setFont(new Font("Roboto", Font.BOLD, 25));
-        a6.setBounds(370, 440, 750, 50);
+        a6.setBounds(370, 450, 750, 50);
 
         name.setText(uname);
         name.setIcon(pfp);
@@ -101,7 +120,7 @@ public class EmployeePage {
 
         JoinedDate.setText("Joined Date : ");
         JoinedDate.setFont(new Font("Roboto", Font.BOLD, 25));
-        JoinedDate.setBounds(100, 100, 350, 30);
+        JoinedDate.setBounds(100, 100, 350, 50);
 
         Role.setText("Role : ");
         Role.setFont(new Font("Roboto", Font.BOLD, 25));
@@ -155,7 +174,7 @@ public class EmployeePage {
                 contact = in.next();
                 quali = in.next();
                 role = in.next();
-                setlabels(uname1, joindate, sal, age, contact, quali, role);
+                setlabels(uname1, joindate, role, sal, contact, quali, age);
                 if (uname.equals(uname1)) {
                     found = true;
                 }
@@ -166,4 +185,11 @@ public class EmployeePage {
         }
 
     }
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == logout) {
+            window.dispose();
+            new Admin_Employee_login();
+        }
+    }
+
 }

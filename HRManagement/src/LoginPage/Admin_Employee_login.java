@@ -11,7 +11,7 @@ import java.awt.event.ActionListener;
 import java.util.HashMap;
 
 public class Admin_Employee_login implements ActionListener {
-    ImageIcon image = new ImageIcon("HRManagement\\src\\LoginPage\\hrmgr2.png");
+    ImageIcon image = new ImageIcon("HRManagement/src/LoginPage/hrmgr2.png");
 
     JButton admin = new JButton("Admin Login");
     JButton Employee = new JButton("Employee Login");

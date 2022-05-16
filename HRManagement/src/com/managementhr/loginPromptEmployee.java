@@ -121,6 +121,11 @@ public class loginPromptEmployee implements ActionListener {
             String uname1 = "", pass1 = "";
 
             try {
+
+                if (username == "" || password == "") {
+                    throw new Exception("Please Enter Your Username and Password");
+                }
+
                 Scanner in = new Scanner(new File(path));
                 in.useDelimiter("[,\n]");
 
