@@ -1,14 +1,20 @@
 package com.managementhr;
 
+import LoginPage.ADMINEMPLOYEES.EmployeePage;
+
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.io.File;
+import java.util.*;
 
-public class loginPromptEmployee {
+public class loginPromptEmployee implements ActionListener {
+    String path = "HRManagement/src/LoginPage/ADMINEMPLOYEES/csvs/EmployeeUsernamePass.csv";
     JPasswordField passwd = new JPasswordField();
-
+    JTextField text = new JTextField();
     JButton loginButton = new JButton("Login");
-
-
+    JFrame frame;
     public loginPromptEmployee() {
         JLabel label1 = new JLabel();
         JLabel label2 = new JLabel();
@@ -34,7 +40,7 @@ public class loginPromptEmployee {
         label2.setBounds(170, 260, 180, 80);
         label2.setFont(new Font("Roboto", Font.PLAIN, 20));
 
-        JFrame frame = new JFrame();
+        frame = new JFrame();
 
         frame.setVisible(true);
         //lframe.getContentPane();
@@ -47,7 +53,7 @@ public class loginPromptEmployee {
         frame.setLayout(null);
 
         //lframe.setLayout(null);
-        JTextField text = new JTextField();
+        text = new JTextField();
         text.setPreferredSize(new Dimension(200,30));
         text.setBounds(280,210,180,25);
         text.setFont(new Font("Roboto", Font.BOLD, 18));
@@ -60,6 +66,7 @@ public class loginPromptEmployee {
         loginButton.setFocusable(false);
         loginButton.setFont(new Font("Roboto", Font.BOLD, 18));
         loginButton.setForeground(Color.BLACK);
+        loginButton.addActionListener(this);
 
         //add component
         frame.add(loginButton);
@@ -69,4 +76,74 @@ public class loginPromptEmployee {
         frame.add(passwd);
         frame.add(text);
     }
+//    private void search(String uname, String pass)
+//    {
+//        int i = 0;
+//        String  uname1 = "", pass1 = "";
+//
+//        try {
+//            Scanner in = new Scanner(new File(path));
+//            in.useDelimiter("[,\n]");
+//           // JOptionPane.showMessageDialog(null, uname);
+//           // JOptionPane.showMessageDialog(null, pass);
+//            while (in.hasNext()) {
+//                uname1 = in.next();
+//                pass1 = in.next();
+//               // JOptionPane.showMessageDialog(null, uname1);
+//               // JOptionPane.showMessageDialog(null, pass1);
+//                if (uname.equals(uname1) && pass.equals(pass1))
+//                {
+//                    JOptionPane.showMessageDialog(null, uname);
+//                    i =1;
+//                    frame.dispose();
+//                    new EmployeePage(uname,pass);
+//               }
+//;
+//            }
+//        } catch (Exception g) {
+//            JOptionPane.showMessageDialog(null, g);
+//
+//        }
+//        if(i==0)
+//        {
+//            JOptionPane.showMessageDialog(null,  uname, "Enter Correct Username/Password",
+//                    JOptionPane.ERROR_MESSAGE);
+//        }
+//
+//    }
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        if(e.getSource() == loginButton){
+            String username = text.getText();
+            String password = String.valueOf(passwd.getPassword());
+            //search(username,password);
+            String  uname1 = "", pass1 = "";
+
+            try {
+                Scanner in = new Scanner(new File(path));
+                in.useDelimiter("[,\n]");
+
+                while (in.hasNext()) {
+                    uname1 = in.next();
+                    pass1 = in.next();
+                    JOptionPane.showMessageDialog(null, username);
+                   if (username.equals(uname1) && password.equals(pass1))
+                  {
+                      JOptionPane.showMessageDialog(null, username);
+
+                      // i =1;
+                        frame.dispose();
+                        new EmployeePage(username,password);
+                    }
+                }
+            } catch (Exception g) {
+                JOptionPane.showMessageDialog(null, g);
+
+            }
+        }
+    }
+
+
 }
+
+
