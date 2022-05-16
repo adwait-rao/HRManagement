@@ -1,9 +1,9 @@
 package com.managementhr;
 
 import LoginPage.ADMINEMPLOYEES.AdminPage;
-import LoginPage.ADMINEMPLOYEES.Adwait;
-import LoginPage.ADMINEMPLOYEES.Dnyaneshwari;
-import LoginPage.ADMINEMPLOYEES.Heramb;
+// import LoginPage.ADMINEMPLOYEES.Adwait;
+// import LoginPage.ADMINEMPLOYEES.Dnyaneshwari;
+// import LoginPage.ADMINEMPLOYEES.Heramb;
 import LoginPage.AdminAndEmployeeIDPASS.AdminIDPass;
 
 import javax.swing.*;

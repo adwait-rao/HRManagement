@@ -10,20 +10,20 @@ public class EmployeePage {
     JFrame window = new JFrame("Employee DashBoard");
     JPanel toppanel = new JPanel();
     JPanel leftpanel = new JPanel();
-    //JPanel rightpanel = new JPanel();
+    // JPanel rightpanel = new JPanel();
     JPanel centerpanel = new JPanel();
     JLabel name = new JLabel();
-    String path = "HRManagement/src/LoginPage/ADMINEMPLOYEES/csvs/employees.csv";
+    String path = "employees.csv";
 
     JLabel JoinedDate = new JLabel();
     JLabel Role = new JLabel();
     JLabel Sal = new JLabel();
     JLabel ConNo = new JLabel();
-    JLabel quali= new JLabel();
-    JLabel age= new JLabel();
-    public EmployeePage(String uname,String pass)
-    {
-        //name.setText("Heramb Bhoodhar");
+    JLabel quali = new JLabel();
+    JLabel age = new JLabel();
+
+    public EmployeePage(String uname, String pass) {
+        // name.setText("Heramb Bhoodhar");
         name.setIcon(pfp);
         name.setFont(new Font("Noto Sans", Font.BOLD, 30));
         name.setHorizontalTextPosition(JLabel.RIGHT);
@@ -34,7 +34,7 @@ public class EmployeePage {
         window.setSize(1280, 700);
         window.setResizable(false);
         window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        search(uname,pass);
+        search(uname, pass);
         toppanel.setBackground(new Color(124, 190, 207));
         toppanel.setPreferredSize(new Dimension(250, 100));
         toppanel.setLayout(null);
@@ -43,9 +43,9 @@ public class EmployeePage {
         leftpanel.setPreferredSize(new Dimension(50, 250));
         leftpanel.setLayout(null);
 
-//        rightpanel.setBackground(new Color(78, 245, 66));
-//        rightpanel.setPreferredSize(new Dimension(50, 250));
-//        rightpanel.setLayout(null);
+        // rightpanel.setBackground(new Color(78, 245, 66));
+        // rightpanel.setPreferredSize(new Dimension(50, 250));
+        // rightpanel.setLayout(null);
 
         centerpanel.setBackground(Color.white);
         centerpanel.setLayout(null);
@@ -53,16 +53,16 @@ public class EmployeePage {
         window.add(toppanel, BorderLayout.NORTH);
         window.add(centerpanel, BorderLayout.CENTER);
         window.add(leftpanel, BorderLayout.WEST);
-//     window.add(rightpanel, BorderLayout.EAST);
+        // window.add(rightpanel, BorderLayout.EAST);
         toppanel.add(name);
         window.setVisible(true);
     }
+
     public static void main(String[] args) {
-        new EmployeePage("Hi","helo");
+        new EmployeePage("Hi", "helo");
     }
 
-    private void setlabels(String uname, String ujdate, String role, String sal, String con,String qual,String age1)
-    {
+    private void setlabels(String uname, String ujdate, String role, String sal, String con, String qual, String age1) {
 
         JLabel a2 = new JLabel(ujdate);
         a2.setFont(new Font("Roboto", Font.BOLD, 25));
@@ -88,16 +88,12 @@ public class EmployeePage {
         a6.setFont(new Font("Roboto", Font.BOLD, 25));
         a6.setBounds(370, 440, 750, 50);
 
-
-
         name.setText(uname);
         name.setIcon(pfp);
         name.setFont(new Font("Noto Sans", Font.BOLD, 30));
         name.setHorizontalTextPosition(JLabel.RIGHT);
         name.setForeground(Color.WHITE);
         name.setBounds(0, 0, 600, 100);
-
-
 
         JoinedDate.setText("Joined Date : ");
         JoinedDate.setFont(new Font("Roboto", Font.BOLD, 25));
@@ -137,26 +133,28 @@ public class EmployeePage {
         centerpanel.add(quali);
         centerpanel.add(age);
     }
-    private void search(String uname, String pass)
-    {
+
+    private void search(String uname, String pass) {
         boolean found = false;
-        String  uname1 = "", pass1 = "",joindate="",sal="",age="",contact="",quali="",role="";
+        String uname1 = "", pass1 = "", joindate = "", sal = "", age = "", contact = "", quali = "", role = "";
 
         try {
             Scanner in = new Scanner(new File(path));
             in.useDelimiter("[,\n]");
 
-            while (in.hasNext()&&!found) {
+            while (in.hasNext() && !found) {
                 uname1 = in.next();
                 pass1 = in.next();
                 joindate = in.next();
                 sal = in.next();
                 age = in.next();
-                contact= in.next();
-                quali=in.next();
-                role=in.next();
-                setlabels(uname1,joindate,sal,age,contact,quali,role);
-                found = true;
+                contact = in.next();
+                quali = in.next();
+                role = in.next();
+                setlabels(uname1, joindate, sal, age, contact, quali, role);
+                if(uname.equals(uname1)) {
+                    found = true;
+                }
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, e);
@@ -165,5 +163,3 @@ public class EmployeePage {
 
     }
 }
-
-
