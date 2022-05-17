@@ -13,7 +13,7 @@ public class loginPromptEmployee implements ActionListener {
     String path = "employeenamepass.csv";
     JPasswordField passwd = new JPasswordField();
     JTextField text = new JTextField();
-    JButton loginButton = new JButton("Login");
+    JButton loginButton = new JButton( "Login");
     JFrame frame;
 
     public loginPromptEmployee() {
