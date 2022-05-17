@@ -138,7 +138,7 @@ public class EmployeePage implements ActionListener{
         ConNo.setFont(new Font("Roboto", Font.BOLD, 25));
         ConNo.setBounds(100, 380, 350, 50);
 
-        quali.setText("Qualificcation : ");
+        quali.setText("Qualification : ");
         quali.setFont(new Font("Roboto", Font.BOLD, 25));
         quali.setBounds(100, 450, 350, 50);
 

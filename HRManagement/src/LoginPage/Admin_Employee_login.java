@@ -76,9 +76,4 @@ public class Admin_Employee_login implements ActionListener {
             }
         }
     }
-
-    public void paint(Graphics g)
-    {
-        g.drawLine(220,20,400,80);
-    }
 }
